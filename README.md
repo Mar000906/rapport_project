@@ -19,7 +19,19 @@ This project is a **local interactive budget management report generator**. It a
   - `Ajouter` – add new entries manually  
   - `Comparaison` – compare datasets  
   - `Stats` – statistical insights  
+---
 
+## Tools / Technologies Used
+
+- **Python 3** – for CSV processing and generating HTML reports  
+- **Pandas** – data manipulation and calculations  
+- **JavaScript (ES6)** – interactive table and chart rendering  
+- **Plotly.js** – interactive charts for monthly evolution  
+- **HTML5 & CSS3** – responsive layout and styling  
+- **VS Code** – code editor  
+- **CSV files** – data source  
+
+---
 ---
 
 ## Overview
