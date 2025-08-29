@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historique des ventes - Rapport Projet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="logo">📜 HistoriquePro</div>
+      <div class="meta">
+        <button id="exportPdf" class="btn">Exporter / Imprimer</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>📊 Historique complet</h1>
+        <p class="subtitle">Toutes les données enregistrées depuis <code>data.csv</code></p>
+      </section>
+
+      <section class="controls-section">
+        <label>Filtrer par mois :
+          <select id="selectMonth">
+            <option value="all">Tous les mois</option>
+          </select>
+        </label>
+        <label>Afficher :
+          <select id="selectType">
+            <option value="all">Ventes / Dépenses / Bénéfice</option>
+            <option value="Ventes">Ventes uniquement</option>
+            <option value="Depenses">Dépenses uniquement</option>
+            <option value="Benefice">Bénéfice uniquement</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="table-section">
+        <div id="tableWrap"></div>
+      </section>
+
+      <footer class="footer">
+        <small>Historique généré automatiquement — script JS</small>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Données embarquées pour JS -->
+  <script>
+    window.REPORT_DATA = {
+      "rows": [
+        {"Mois":"Janvier","Ventes":12000,"Depenses":8000,"Benefice":4000},
+        {"Mois":"Février","Ventes":15000,"Depenses":9500,"Benefice":5500},
+        {"Mois":"Mars","Ventes":17000,"Depenses":11000,"Benefice":6000},
+        {"Mois":"Avril","Ventes":14000,"Depenses":7000,"Benefice":7000},
+        {"Mois":"Mai","Ventes":18000,"Depenses":12000,"Benefice":6000},
+        {"Mois":"Juin","Ventes":20000,"Depenses":13000,"Benefice":7000}
+        // … ajoute toutes tes autres lignes ici comme dans rapport.html
+      ],
+      "columns": ["Mois","Ventes","Depenses","Benefice"]
+    };
+  </script>
+  <script src="historique.js"></script>
+</body>
+</html>

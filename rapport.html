@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Générateur de rapports - 2025</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="logo">✨ Rapport</div>
+
+      <!-- MENU DE NAVIGATION -->
+      <nav class="menu">
+        <a href="rapport.html">Rapport</a>
+        <a href="historique.html">Historique</a>
+        <a href="ajouter.html">Ajouter</a>
+        <a href="comparaison.html">Comparaison</a>
+        <a href="stats.html">Stats</a>
+      </nav>
+
+      <div class="meta">
+        <div>Généré : <strong>2025-08-29 13:06:27</strong></div>
+        <button id="exportPdf" class="btn">Exporter / Imprimer</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>📊 Rapport interactif</h1>
+        <p class="subtitle">Synthèse automatique — données lues depuis <code>data.csv</code></p>
+      </section>
+
+      <section class="cards">
+        <article class="card">
+          <div class="card-title">Total Ventes</div>
+          <div class="card-value" id="totalVentes">--</div>
+        </article>
+        <article class="card">
+          <div class="card-title">Total Dépenses</div>
+          <div class="card-value" id="totalDepenses">--</div>
+        </article>
+        <article class="card">
+          <div class="card-title">Total Bénéfices</div>
+          <div class="card-value" id="totalBenefice">--</div>
+        </article>
+      </section>
+
+      <section class="visual">
+        <div class="visual-left">
+          <h2>Évolution mensuelle</h2>
+          <div id="chart" class="chart"></div>
+        </div>
+        <div class="visual-right">
+          <h2>Options</h2>
+          <div class="controls">
+            <label><input type="checkbox" id="toggleVentes" checked /> Ventes</label><br>
+            <label><input type="checkbox" id="toggleDepenses" checked /> Dépenses</label><br>
+            <label><input type="checkbox" id="toggleBenefice" checked /> Bénéfice</label>
+          </div>
+          <h3>Filtrer mois</h3>
+          <select id="selectMonth">
+            <option value="all">Tous les mois</option>
+          </select>
+          <div style="height:20px"></div>
+          <button id="refresh" class="btn">Rafraîchir le graphique</button>
+        </div>
+      </section>
+
+      <section class="table-section">
+        <h2>Détails des données</h2>
+        <div id="tableWrap"></div>
+      </section>
+
+      <footer class="footer">
+        <small>Rapport généré automatiquement — script Python</small>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Données embarquées pour JS -->
+  <script>
+    window.REPORT_DATA = {"rows": [{"Mois": "Janvier", "Ventes": 12000, "Depenses": 8000, "Benefice": 4000}, {"Mois": "Février", "Ventes": 15000, "Depenses": 9500, "Benefice": 5500}, {"Mois": "Mars", "Ventes": 17000, "Depenses": 11000, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 14000, "Depenses": 7000, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 18000, "Depenses": 12000, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 20000, "Depenses": 13000, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 21000, "Depenses": 14000, "Benefice": 7000}, {"Mois": "Août", "Ventes": 19000, "Depenses": 12500, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 22000, "Depenses": 15000, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 24000, "Depenses": 16000, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 23000, "Depenses": 15500, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 26000, "Depenses": 17000, "Benefice": 9000}, {"Mois": "Janvier", "Ventes": 13000, "Depenses": 8500, "Benefice": 4500}, {"Mois": "Février", "Ventes": 16000, "Depenses": 10000, "Benefice": 6000}, {"Mois": "Mars", "Ventes": 17500, "Depenses": 11500, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 14500, "Depenses": 7500, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 18500, "Depenses": 12500, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 20500, "Depenses": 13500, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 21500, "Depenses": 14500, "Benefice": 7000}, {"Mois": "Août", "Ventes": 19500, "Depenses": 13000, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 22500, "Depenses": 15500, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 24500, "Depenses": 16500, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 23500, "Depenses": 16000, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 26500, "Depenses": 17500, "Benefice": 9000}, {"Mois": "Janvier", "Ventes": 13500, "Depenses": 9000, "Benefice": 4500}, {"Mois": "Février", "Ventes": 16500, "Depenses": 10500, "Benefice": 6000}, {"Mois": "Mars", "Ventes": 18000, "Depenses": 12000, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 15000, "Depenses": 8000, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 19000, "Depenses": 13000, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 21000, "Depenses": 14000, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 22000, "Depenses": 15000, "Benefice": 7000}, {"Mois": "Août", "Ventes": 20000, "Depenses": 13500, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 23000, "Depenses": 16000, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 25000, "Depenses": 17000, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 24000, "Depenses": 16500, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 27000, "Depenses": 18000, "Benefice": 9000}, {"Mois": "Janvier", "Ventes": 14000, "Depenses": 9500, "Benefice": 4500}, {"Mois": "Février", "Ventes": 17000, "Depenses": 11000, "Benefice": 6000}, {"Mois": "Mars", "Ventes": 18500, "Depenses": 12500, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 15500, "Depenses": 8500, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 19500, "Depenses": 13500, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 21500, "Depenses": 14500, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 22500, "Depenses": 15500, "Benefice": 7000}, {"Mois": "Août", "Ventes": 20500, "Depenses": 14000, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 23500, "Depenses": 16500, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 25500, "Depenses": 17500, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 24500, "Depenses": 17000, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 27500, "Depenses": 18500, "Benefice": 9000}, {"Mois": "Janvier", "Ventes": 14500, "Depenses": 10000, "Benefice": 4500}, {"Mois": "Février", "Ventes": 17500, "Depenses": 11500, "Benefice": 6000}, {"Mois": "Mars", "Ventes": 19000, "Depenses": 13000, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 16000, "Depenses": 9000, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 20000, "Depenses": 14000, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 22000, "Depenses": 15000, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 23000, "Depenses": 16000, "Benefice": 7000}, {"Mois": "Août", "Ventes": 21000, "Depenses": 14500, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 24000, "Depenses": 17000, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 26000, "Depenses": 18000, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 25000, "Depenses": 17500, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 28000, "Depenses": 19000, "Benefice": 9000}, {"Mois": "Janvier", "Ventes": 15000, "Depenses": 10500, "Benefice": 4500}, {"Mois": "Février", "Ventes": 18000, "Depenses": 12000, "Benefice": 6000}, {"Mois": "Mars", "Ventes": 19500, "Depenses": 13500, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 16500, "Depenses": 9500, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 20500, "Depenses": 14500, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 22500, "Depenses": 15500, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 23500, "Depenses": 16500, "Benefice": 7000}, {"Mois": "Août", "Ventes": 21500, "Depenses": 15000, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 24500, "Depenses": 17500, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 26500, "Depenses": 18500, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 25500, "Depenses": 18000, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 28500, "Depenses": 19500, "Benefice": 9000}, {"Mois": "Janvier", "Ventes": 15500, "Depenses": 11000, "Benefice": 4500}, {"Mois": "Février", "Ventes": 18500, "Depenses": 12500, "Benefice": 6000}, {"Mois": "Mars", "Ventes": 20000, "Depenses": 14000, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 17000, "Depenses": 10000, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 21000, "Depenses": 15000, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 23000, "Depenses": 16000, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 24000, "Depenses": 17000, "Benefice": 7000}, {"Mois": "Août", "Ventes": 22000, "Depenses": 15500, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 25000, "Depenses": 18000, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 27000, "Depenses": 19000, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 26000, "Depenses": 18500, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 29000, "Depenses": 20000, "Benefice": 9000}, {"Mois": "Janvier", "Ventes": 16000, "Depenses": 11500, "Benefice": 4500}, {"Mois": "Février", "Ventes": 19000, "Depenses": 13000, "Benefice": 6000}, {"Mois": "Mars", "Ventes": 20500, "Depenses": 14500, "Benefice": 6000}, {"Mois": "Avril", "Ventes": 17500, "Depenses": 10500, "Benefice": 7000}, {"Mois": "Mai", "Ventes": 21500, "Depenses": 15500, "Benefice": 6000}, {"Mois": "Juin", "Ventes": 23500, "Depenses": 16500, "Benefice": 7000}, {"Mois": "Juillet", "Ventes": 24500, "Depenses": 17500, "Benefice": 7000}, {"Mois": "Août", "Ventes": 22500, "Depenses": 16000, "Benefice": 6500}, {"Mois": "Septembre", "Ventes": 25500, "Depenses": 18500, "Benefice": 7000}, {"Mois": "Octobre", "Ventes": 27500, "Depenses": 19500, "Benefice": 8000}, {"Mois": "Novembre", "Ventes": 26500, "Depenses": 19000, "Benefice": 7500}, {"Mois": "Décembre", "Ventes": 29500, "Depenses": 20500, "Benefice": 9000}], "columns": ["Mois", "Ventes", "Depenses", "Benefice"], "totaux": {"TotalVentes": 2023000, "TotalDepenses": 1372000, "TotalBenefice": 651000, "Lignes": 96}, "generated_at": "2025-08-29 13:06:27"};
+  </script>
+
+  <!-- Script externe -->
+  <script src="script.js"></script>
+</body>
+</html>

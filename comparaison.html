@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparaison - Rapport Projet</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="logo">📈 Comparaison</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Comparer les données</h1>
+        <p class="subtitle">Sélectionnez les mois et séries à comparer sur le graphique.</p>
+      </section>
+
+      <section class="visual">
+        <div class="visual-left">
+          <h2>Graphique de comparaison</h2>
+          <div id="chartCompare" class="chart"></div>
+        </div>
+        <div class="visual-right">
+          <h2>Options</h2>
+          <div class="controls">
+            <label><input type="checkbox" id="toggleVentes" checked /> Ventes</label><br>
+            <label><input type="checkbox" id="toggleDepenses" checked /> Dépenses</label><br>
+            <label><input type="checkbox" id="toggleBenefice" checked /> Bénéfice</label>
+          </div>
+
+          <h3>Filtrer mois</h3>
+          <select id="selectMonthCompare" multiple style="width:100%; height:150px;"></select>
+
+          <div style="height:20px"></div>
+          <button id="refreshCompare" class="btn">Rafraîchir</button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <small>Comparaison dynamique — script JS</small>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    window.REPORT_DATA = window.REPORT_DATA || {
+      rows: [],
+      columns: ["Mois","Ventes","Depenses","Benefice"]
+    };
+  </script>
+  <script src="comparaison.js"></script>
+</body>
+</html>

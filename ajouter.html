@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter une entrée - Rapport Projet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="logo">➕ Ajouter une entrée</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Ajouter une nouvelle donnée</h1>
+        <p class="subtitle">Complétez les champs ci-dessous et validez pour enregistrer.</p>
+      </section>
+
+      <section class="form-section">
+        <form id="addForm">
+          <label>Mois :
+            <input type="text" id="inputMois" placeholder="Ex: Janvier" required>
+          </label>
+          <label>Ventes :
+            <input type="number" id="inputVentes" placeholder="Ex: 12000" required>
+          </label>
+          <label>Dépenses :
+            <input type="number" id="inputDepenses" placeholder="Ex: 8000" required>
+          </label>
+          <label>Bénéfice :
+            <input type="number" id="inputBenefice" placeholder="Ex: 4000" required>
+          </label>
+          <button type="submit" class="btn">Ajouter</button>
+        </form>
+      </section>
+
+      <section class="table-section">
+        <h2>Données actuelles</h2>
+        <div id="tableWrap"></div>
+      </section>
+
+      <footer class="footer">
+        <small>Entrées ajoutées dynamiquement — script JS</small>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    window.REPORT_DATA = {
+      rows: [],
+      columns: ["Mois","Ventes","Depenses","Benefice"]
+    };
+  </script>
+  <script src="ajouter.js"></script>
+</body>
+</html>
